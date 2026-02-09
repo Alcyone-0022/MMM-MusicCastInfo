@@ -22,6 +22,7 @@ Module.register("MMM-MusicCastInfo", {
       this.updateDom();
     } else if (notification === "STATUS_UPDATE") {
       this.status = payload;
+      this.deviceMaxVolDecimal = payload.max_volume
       this.updateDom();
     }
   },
@@ -39,20 +40,24 @@ Module.register("MMM-MusicCastInfo", {
     name.className = "device-name bright medium";
     name.innerHTML = this.deviceName;
 
+    const vol_info = document.createElement("div");
+    const volume_dB = this.status.actual_volume.value;
+    const volume_percent = Math.trunc((this.status.volume / this.deviceMaxVolDecimal) * 100);
+    vol_info.className = "vol-info-container bright medium";
+    vol_info.innerHTML = `${volume_dB} ${this.status.actual_volume.unit}(${volume_percent}%)</div>`;
+
     const info = document.createElement("div");
     info.className = "status-info small normal";
     
     // 전원 상태, 입력 소스, 볼륨 표시
     const powerStr = this.status.power === "on" ? "ON" : "OFF";
-    const volume = this.status.actual_volume.value;
+    
     const input = this.status.input.toUpperCase();
 
-    info.innerHTML = `
-      <div>Status: ${powerStr} | Input: ${input}</div>
-      <div>Volume: ${volume} ${this.status.actual_volume.unit}</div>
-    `;
+    info.innerHTML = `<div>Status: ${powerStr} | Input: ${input}</div>`;
 
     wrapper.appendChild(name);
+    wrapper.appendChild(vol_info);
     wrapper.appendChild(info);
     return wrapper;
   }
