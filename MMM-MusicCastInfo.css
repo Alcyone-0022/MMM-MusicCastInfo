@@ -1,0 +1,18 @@
+.musiccast-wrapper {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.device-name {
+    color: var(--color-text-bright);
+    line-height: 1.225;
+    font-size: larger;
+    font-weight: 200;
+}
+
+.vol-info-container {
+    color: var(--color-text-bright);
+    line-height: 1.225;
+    font-size: 160%;
+}

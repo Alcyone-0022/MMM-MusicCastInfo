@@ -37,13 +37,13 @@ Module.register("MMM-MusicCastInfo", {
     }
 
     const name = document.createElement("div");
-    name.className = "device-name bright medium";
+    name.className = "device-name";
     name.innerHTML = this.deviceName;
 
     const vol_info = document.createElement("div");
     const volume_dB = this.status.actual_volume.value;
     const volume_percent = Math.trunc((this.status.volume / this.deviceMaxVolDecimal) * 100);
-    vol_info.className = "vol-info-container bright medium";
+    vol_info.className = "vol-info-container";
     vol_info.innerHTML = `${volume_dB} ${this.status.actual_volume.unit}(${volume_percent}%)</div>`;
 
     const info = document.createElement("div");
